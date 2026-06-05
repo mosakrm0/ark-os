@@ -18,7 +18,7 @@ Ark OS does the opposite. It is built **exclusively** for containers: a kernel c
 
 ```
 Alpine Linux   ~8 MB  (general purpose, musl libc)
-Ark OS        ~2MB   (container-native, full shell, custom kernel)
+Ark OS        ~ 2MB   (container-native, full shell, custom kernel)
 ```
 
 ---
