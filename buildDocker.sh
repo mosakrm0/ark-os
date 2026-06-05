@@ -8,11 +8,6 @@ echo "==================================================="
 
 BUSYBOX_VERSION="1.36.1"
 
-sudo apt-get update
-sudo apt-get install -y build-essential
-sudo apt-get install -y bzip2 dos2unix
-dos2unix buildDocker.sh 
-
 if [ ! -d "busybox-${BUSYBOX_VERSION}/_install" ]; then
     echo "[1/5] Downloading and compiling BusyBox..."
     wget -nc https://busybox.net/downloads/busybox-${BUSYBOX_VERSION}.tar.bz2
