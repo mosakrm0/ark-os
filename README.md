@@ -3,7 +3,7 @@
 > The container's favorite OS a razor-thin Linux base built from scratch, optimized from the kernel up for running workloads in containers with zero waste.
 
 ![Kernel](https://img.shields.io/badge/Kernel-v7.0.11-brightgreen)
-![Image Size](https://img.shields.io/badge/Image%20Size-%3C5MB-brightgreen)
+![ImageSize](https://img.shields.io/badge/ImageSize-2MB-brightgreen)
 ![Docker](https://img.shields.io/badge/Docker-FROM%20scratch-black)
 ![Linking](https://img.shields.io/badge/Linking-Static-orange)
 ![License](https://img.shields.io/badge/License-MIT-blue)
@@ -18,7 +18,7 @@ Ark OS does the opposite. It is built **exclusively** for containers: a kernel c
 
 ```
 Alpine Linux   ~8 MB  (general purpose, musl libc)
-Ark OS        <5 MB   (container-native, full shell, custom kernel)
+Ark OS        ~2MB   (container-native, full shell, custom kernel)
 ```
 
 ---
