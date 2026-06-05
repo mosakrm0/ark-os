@@ -9,6 +9,11 @@ echo "==================================================="
 KERNEL_VERSION="7.0.11"
 CORES=$(nproc)
 
+sudo apt-get update
+sudo apt-get install -y build-essential
+sudo apt-get install -y flex bison libelf-dev libssl-dev bc
+
+
 if [ ! -f "linux-${KERNEL_VERSION}/arch/x86/boot/bzImage" ]; then
     echo "[1/4] Downloading and Compiling Linux Kernel ${KERNEL_VERSION}..."
     if [ ! -d "linux-${KERNEL_VERSION}" ]; then
