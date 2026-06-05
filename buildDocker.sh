@@ -10,8 +10,7 @@ BUSYBOX_VERSION="1.36.1"
 
 
 sudo apt-get update
-sudo apt-get install -y build-essential
-sudo apt-get install -y flex bison libelf-dev libssl-dev b
+sudo apt-get install -y build-essential bzip2 flex bison libelf-dev libssl-dev bc
 
 if [ ! -d "busybox-${BUSYBOX_VERSION}/_install" ]; then
     echo "[1/5] Downloading and compiling BusyBox..."
