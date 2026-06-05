@@ -39,15 +39,17 @@ fi
 
 echo "[3/4] Packaging filesystem into initramfs..."
 cd rootfs
-find . | cpio -o -H newc | gzip > ../initramfs.cpio.gz
+# Use -print0 and --null for safer file path handling, and drop the gzip pipe entirely
+find . -print0 | cpio --null -o -H newc > ../initramfs.cpio
 cd ..
 
-echo "[4/4] Booting Ark OS in QEMU... "
+echo "[4/4] Booting Ark OS in QEMU..."
 echo "To exit the emulator later, press Ctrl+A, release, then X."
 sleep 3
 
 qemu-system-x86_64 \
     -kernel linux-${KERNEL_VERSION}/arch/x86/boot/bzImage \
-    -initrd initramfs.cpio.gz \
+    -initrd initramfs.cpio \
+    -m 512M \
     -append "console=ttyS0 quiet rdinit=/Noah" \
     -nographic
