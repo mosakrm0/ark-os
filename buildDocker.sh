@@ -48,6 +48,6 @@ echo "[4/5] Building Docker Image..."
 sudo docker build -t ark-os:latest .
 
 echo "==================================================="
-echo "   Ark OS Build Successfully Completed! 🚀"
+echo "   Ark OS Build Successfully Completed!"
 echo "   Run with: sudo docker run -it ark-os"
 echo "==================================================="
