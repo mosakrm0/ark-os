@@ -39,7 +39,7 @@ cd rootfs
 find . | cpio -o -H newc | gzip > ../initramfs.cpio.gz
 cd ..
 
-echo "[4/4] Booting Ark OS in QEMU..."
+echo "[4/4] Booting Ark OS in QEMU... "
 echo "To exit the emulator later, press Ctrl+A, release, then X."
 sleep 3
 
