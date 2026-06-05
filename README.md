@@ -12,13 +12,13 @@
 
 ## Why Ark OS?
 
-Most base images drag in a full OS — package managers, init systems, shared libraries, and hundreds of binaries your container will never touch. Every megabyte is extra attack surface, slower pulls, and wasted memory.
+Most base images drag in a full OS, package managers, init systems, shared libraries, and hundreds of binaries your container will never touch. Every megabyte is extra attack surface, slower pulls, and wasted memory.
 
 Ark OS does the opposite. It is built **exclusively** for containers: a kernel compiled only for container primitives, a PID 1 that understands container lifecycles, and a static binary userland with no shared library baggage. Nothing more.
 
 ```
 Alpine Linux   ~8 MB  (general purpose, musl libc)
-Ark OS        ~ 2MB   (container-native, full shell, custom kernel)
+Ark OS        ~2 MB   (container-native, full shell, custom kernel)
 ```
 
 ---
@@ -29,10 +29,10 @@ Ark OS        ~ 2MB   (container-native, full shell, custom kernel)
 
 The Linux v7.0.11 kernel is compiled from source with a `.config` stripped down to exactly what containers need:
 
-- **Namespaces** — PID, network, mount, UTS, IPC, and user isolation baked in
-- **cgroups v2** — CPU, memory, and I/O limits enforced at the kernel level
-- **No hardware drivers** — no USB, no GPU, no audio, no Bluetooth; this kernel never touches bare metal
-- **No modules** — everything compiled in; no `modprobe`, no `/lib/modules`, no surprises at runtime
+- **Namespaces** - PID, network, mount, UTS, IPC, and user isolation baked in
+- **cgroups v2** - CPU, memory, and I/O limits enforced at the kernel level
+- **No hardware drivers** - no USB, no GPU, no audio, no Bluetooth; this kernel never touches bare metal
+- **No modules** - everything compiled in; no `modprobe`, no `/lib/modules`, no surprises at runtime
 
 The result is the fastest boot time achievable for a containerized workload.
 
