@@ -12,6 +12,9 @@ CORES=$(nproc)
 sudo apt-get update
 sudo apt-get install -y build-essential
 sudo apt-get install -y flex bison libelf-dev libssl-dev bc
+sudo apt install -y qemu-system qemu-utils virt-manager libvirt-daemon-system libvirt-clients
+sudo systemctl enable --now libvirtd
+sudo adduser $USER libvirt
 
 
 if [ ! -f "linux-${KERNEL_VERSION}/arch/x86/boot/bzImage" ]; then
