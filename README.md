@@ -89,6 +89,10 @@ qemu-system-x86_64 \
     -append "console=ttyS0 quiet rdinit=/init" \
     -nographic
 ```
+
+use ark-down to shut it down
+use CTRL-A + X to exit qemu
+
 The script compiles the kernel, builds Noah, assembles the rootfs, and start the OS in qemu VM, all in one step.
 
 
