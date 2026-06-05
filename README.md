@@ -75,17 +75,34 @@ CMD ["/app/server"]
 
 ### Build from Source
 
-**Prerequisites:** Debian/Ubuntu host with build tools and Docker.
+**Prerequisites:** Debian/Ubuntu and qemu for a vm.
 
-```bash
-sudo apt-get update && sudo apt-get install -y \
-  build-essential libelf-dev docker.io
-```
 
 ```bash
 git clone https://github.com/mosakrm0/ark-os
 cd ark-os
-./build.sh
+./kernelBuild.sh
+
+qemu-system-x86_64 \
+    -kernel linux-7.0.11/arch/x86/boot/bzImage \
+    -initrd initramfs.cpio.gz \
+    -append "console=ttyS0 quiet rdinit=/init" \
+    -nographic
+```
+The script compiles the kernel, builds Noah, assembles the rootfs, and start the OS in qemu VM, all in one step.
+
+
+### Build AS Docker Image
+
+**Prerequisites:** Debian/Ubuntu.
+
+
+```bash
+git clone https://github.com/mosakrm0/ark-os
+cd ark-os
+./buildDocker.sh
+
+sudo docker run -it ark-os
 ```
 
 The script compiles the kernel, builds Noah, assembles the rootfs, and exports a Docker image, all in one step.
