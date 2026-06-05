@@ -8,10 +8,11 @@ echo "==================================================="
 
 KERNEL_VERSION="7.0.11"
 CORES=$(nproc)
+BUSYBOX_VERSION="1.36.1"
 
 sudo apt-get update
 sudo apt-get install -y build-essential
-sudo apt-get install -y flex bison libelf-dev libssl-dev bc cpio
+sudo apt-get install -y flex bison libelf-dev libssl-dev bc bzip2
 sudo apt install -y qemu-system qemu-utils virt-manager libvirt-daemon-system libvirt-clients
 sudo systemctl enable --now libvirtd
 sudo adduser $USER libvirt
@@ -32,8 +33,46 @@ else
     echo "[1/4] Linux Kernel is already compiled. Skipping..."
 fi
 
+
+
+if [ ! -d "busybox-${BUSYBOX_VERSION}/_install" ]; then
+    echo "[1/5] Downloading and compiling BusyBox..."
+    wget -nc https://busybox.net/downloads/busybox-${BUSYBOX_VERSION}.tar.bz2
+    tar -xf busybox-${BUSYBOX_VERSION}.tar.bz2
+    cd busybox-${BUSYBOX_VERSION}
+    
+    make defconfig
+    
+    sed -i 's/^.*CONFIG_STATIC[^_].*$/CONFIG_STATIC=y/g' .config
+    sed -i 's/CONFIG_TC=y/# CONFIG_TC is not set/g' .config
+    
+    make -j$(nproc)
+    make install
+    cd ..
+else
+    echo "[1/5] BusyBox is already compiled, skipping download..."
+fi
+
+echo "[2/5] Preparing clean root filesystem..."
+rm -rf rootfs
+mkdir -p rootfs/bin rootfs/sbin rootfs/usr rootfs/dev rootfs/proc rootfs/sys
+cp -a busybox-${BUSYBOX_VERSION}/_install/* rootfs/
+
+echo "[3/5] Compiling Noah (PID 1) and Custom Commands..."
+gcc -static init.c -o rootfs/Noah
+chmod +x rootfs/Noah
+
+if [ -f "poweroff.c" ]; then
+    gcc -static poweroff.c -o rootfs/bin/ark-down
+    chmod +x rootfs/bin/ark-down
+fi
+
+
+
+
+
 if [ ! -d "rootfs" ]; then
-    echo "Error: rootfs not found! Please run ./build.sh first to generate the filesystem."
+    echo "Error: rootfs not found!"
     exit 1
 fi
 
