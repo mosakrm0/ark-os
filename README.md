@@ -85,12 +85,12 @@ cd ark-os
 
 qemu-system-x86_64 \
     -kernel linux-7.0.11/arch/x86/boot/bzImage \
-    -initrd initramfs.cpio.gz \
-    -append "console=ttyS0 quiet rdinit=/init" \
+    -initrd initramfs.cpio \
+    -append "console=ttyS0 quiet rdinit=/Noah" \
     -nographic
 ```
 
-use ark-down to shut it down
+use ark-down to shut it down, 
 use CTRL-A + X to exit qemu
 
 The script compiles the kernel, builds Noah, assembles the rootfs, and start the OS in qemu VM, all in one step.
@@ -136,7 +136,7 @@ No `/home`, no `/root`, no `/var/log`, no `/etc/passwd` skeleton. If your worklo
 
 | Principle | How Ark OS Delivers It |
 |---|---|
-| **Container-first** | Every decision — kernel config, init design, filesystem layout — optimizes for containers, not bare metal |
+| **Container-first** | Every decision - kernel config, init design, filesystem layout - optimizes for containers, not bare metal |
 | **Minimal image size** | No base distro layer; `FROM scratch` with only the rootfs on top |
 | **No shared libraries** | `-static` compilation across the board; no glibc, no linker, no surprises |
 | **Signal-correct PID 1** | Noah propagates `SIGTERM`/`SIGINT` and exits with the workload's code |
