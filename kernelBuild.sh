@@ -68,9 +68,6 @@ if [ -f "poweroff.c" ]; then
 fi
 
 
-
-
-
 if [ ! -d "rootfs" ]; then
     echo "Error: rootfs not found!"
     exit 1
@@ -81,6 +78,10 @@ cd rootfs
 # Use -print0 and --null for safer file path handling, and drop the gzip pipe entirely
 find . -print0 | cpio --null -o -H newc > ../initramfs.cpio
 cd ..
+
+# Cleaning Up
+rm busybox-${BUSYBOX_VERSION}.tar.bz2
+rm linux-${KERNEL_VERSION}.tar.xz
 
 echo "[4/4] Booting Ark OS in QEMU..."
 echo "To exit the emulator later, press Ctrl+A, release, then X."

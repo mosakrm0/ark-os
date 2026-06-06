@@ -44,6 +44,8 @@ if [ -f "poweroff.c" ]; then
     chmod +x rootfs/bin/ark-down
 fi
 
+rm busybox-${BUSYBOX_VERSION}.tar.bz2
+
 echo "[4/5] Building Docker Image..."
 sudo docker build -t ark-os:latest .
 
