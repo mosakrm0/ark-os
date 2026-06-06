@@ -36,7 +36,7 @@ mkdir -p rootfs/bin rootfs/sbin rootfs/usr rootfs/dev rootfs/proc rootfs/sys
 cp -a busybox-${BUSYBOX_VERSION}/_install/* rootfs/
 
 echo "[3/5] Compiling Noah (PID 1) and Custom Commands..."
-gcc -static init.c -o rootfs/Noah
+gcc -static Noah.c -o rootfs/Noah
 chmod +x rootfs/Noah
 
 if [ -f "poweroff.c" ]; then
