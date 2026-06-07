@@ -20,6 +20,14 @@ int main() {
     mount("proc", "/proc", "proc", 0, NULL);
     mount("sysfs", "/sys", "sysfs", 0, NULL);
 
+    // Mute non-critical kernel logs
+    int printk_fd = open("/proc/sys/kernel/printk", O_WRONLY);
+    if (printk_fd >= 0) {
+        // "3 4 1 3" tells the kernel to only print KERN_ERR (3) and higher to the console
+        write(printk_fd, "3 4 1 3\n", 8);
+        close(printk_fd);
+    }
+
     printf("\n===================================================\n");
     printf("   Boot successful! Welcome to Ark OS.\n");
     printf("   I am PID 1, and my name is Noah.\n");
