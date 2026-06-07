@@ -128,7 +128,7 @@ Clean by design. Only what a container needs to function:
 └── sys/          # Kernel/hardware state (mount point)
 ```
 
-No `/home`, no `/root`, no `/var/log`, no `/etc/passwd` skeleton. If your workload doesn't need it, it isn't here.
+No `/home`, no `/var/log`, no `/etc/passwd` skeleton. If your workload doesn't need it, it isn't here.
 
 ---
 
@@ -145,24 +145,4 @@ No `/home`, no `/root`, no `/var/log`, no `/etc/passwd` skeleton. If your worklo
 | **Fast cold start** | Driver-free kernel + single-binary init = sub-second container startup |
 | **Reproducible builds** | `buildDocker.sh` produces a bit-for-bit identical image from the same source |
 
----
 
-## Project Structure
-
-```
-ark-os/
-├── kernel/           # Kernel source and stripped .config
-├── init/             # Noah source (C)
-│   └── noah.c
-├── rootfs/           # Assembled root filesystem
-├── Dockerfile        # FROM scratch image definition
-├── buildDocker.sh          # One-step build script for Docker 
-├── kernelBuild.sh          # One-step build script for VM
-└── README.md
-```
-
----
-
-## License
-
-MIT — use it, fork it, ship it.
