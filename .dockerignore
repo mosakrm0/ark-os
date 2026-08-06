@@ -1,0 +1,23 @@
+# Keep the build context small
+.git
+.github
+.vscode
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+node_modules
+busybox-1.36.1
+Noah-static
+Noah
+build.sh
+prune_rootfs.sh
+README.md
+test.sh
+.gitignore
+.dockerignore
